@@ -161,6 +161,7 @@ function setDance(did,dname)
     end
 end
 ```
+
 ```lua
 -- add at bottom of rpemotes/client/Emote.lua
 local danceflag = true
@@ -174,5 +175,21 @@ RegisterNetEvent('animations:client:PlayEmoteSync', function(args, coords)
       end
     end
   end
+end)
+```
+
+```lua
+-- add at bottom of  qb-adminmenu/server/server.lua
+RegisterServerEvent("qb-admin:server:setemote")
+AddEventHandler("qb-admin:server:setemote", function(dance)
+    if QBCore.Functions.HasPermission(source, 'god') or IsPlayerAceAllowed(source, 'command') then
+        local player = source
+        local ped = GetPlayerPed(player)
+        local playerCoords = GetEntityCoords(ped)
+        local args = { dance }
+        TriggerClientEvent('animations:client:PlayEmoteSync', -1, args, playerCoords)
+    else
+        TriggerClientEvent('QBCore:Notify', source, "No permission", 'error')
+    end
 end)
 ```
