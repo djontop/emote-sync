@@ -160,7 +160,6 @@ function setDance(did,dname)
         QBCore.Functions.Notify("Invalid Dance or emote", "error")
     end
 end
-end)
 ```
 ```lua
 -- add at bottom of rpemotes/client/Emote.lua
